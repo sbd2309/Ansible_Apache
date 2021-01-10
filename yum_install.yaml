@@ -1,0 +1,33 @@
+- hosts:
+        - all
+  tasks:
+        - action: ping
+[ansible@ip-172-31-23-49 playbook]$ cat yum_install.yaml 
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+        name: Install pre-required packages
+        yum:
+                name: "{{ packages }}"
+        vars:
+                packages:
+                - gcc
+                - gcc-c++
+                - vim
+                - wget
+                - libuuid
+                - libuuid-devel
+                - zlib-devel
+                - expat-devel
+                - openssl
+                - openssl-devel
+                - cjose
+                - jansson
+                - jansson-devel    
+                - libevent
+                - libtevent-devel
+                - libevent-devel

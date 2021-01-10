@@ -1,0 +1,60 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+      name: Extract Apache
+      unarchive:
+                src: /tmp/packages/httpd-2.4.46.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name: Extract APR
+      unarchive:
+                src: /tmp/packages/apr-1.7.0.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name: Extract APR_UTILS
+      unarchive:
+                src: /tmp/packages/apr-util-1.6.1.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name: Extract PCRE Extract
+      unarchive:
+                src: /tmp/packages/pcre-8.43.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name: Extract OpenSSL Extract
+      unarchive:
+                src: /tmp/packages/openssl-1.1.1d.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name: Extract Tomcat_Connector Extract
+      unarchive:
+                src: /tmp/packages/tomcat-connectors-1.2.48-src.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name:  Memcache Extract
+      unarchive:
+                src: /tmp/packages/memcached-1.6.9.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name:  OpenSSL Extract
+      unarchive:
+                src: /tmp/packages/mod_auth_openidc-2.4.5.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes
+    -
+      name:  Curl Extract
+      unarchive:
+                src: /tmp/packages/curl-7.74.0.tar.gz
+                dest: /tmp/ExtractedPackages
+                remote_src: yes

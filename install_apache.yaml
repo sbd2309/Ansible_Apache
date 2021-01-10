@@ -1,0 +1,42 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+        name : Creates APR Directory
+        file:
+                path: "/tmp/ExtractedPackages/httpd-2.4.46/srclib/apr"
+                state: directory
+    -
+        name : Creates APR UTIL Directory
+        file:
+                path: "/tmp/ExtractedPackages/httpd-2.4.46/srclib/apr-util"
+                state: directory
+    -
+        name : Extarcting APR
+        shell : tar xf /tmp/packages/apr-1.7.0.tar.gz --strip-components 1
+        args:
+                chdir: "/tmp/ExtractedPackages/httpd-2.4.46/srclib/apr"
+                executable: /bin/bash
+    -
+        name : Extarcting APR-UTIL
+        shell : tar xf /tmp/packages/apr-util-1.6.1.tar.gz --strip-components 1
+        args:
+                chdir: "/tmp/ExtractedPackages/httpd-2.4.46/srclib/apr-util"
+                executable: /bin/bash
+    -
+        name: Install Apache
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/httpd-2.4.46/"
+        with_items:
+                - ./configure --prefix="/tmp/InstalledPackages/httpd-2.4.46" --with-ssl="/tmp/InstalledPackages/openssl-1.1.1d" --with-pcre="/tmp/InstalledPackages/pcre-8.43" --enable-so --with-included-apr "--enable-mpms-shared=event worker" "--enable-mods-shared=deflate headers rewrite mime mine-magic ssl"
+                - /usr/bin/make
+                - /usr/bin/make install
+    -  
+        name: Install JK Module
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/tomcat-connectors-1.2.48-src/native"
+        with_items:
+                - ./configure --with-apxs=/tmp/InstalledPackages/httpd-2.4.46/bin/apxs
+                - /usr/bin/make
+                - /usr/bin/make install

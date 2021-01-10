@@ -1,0 +1,51 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+      name: Download Apache
+      get_url:
+                url="https://mirrors.estointernet.in/apache//httpd/httpd-2.4.46.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download APR
+      get_url:
+                url="https://downloads.apache.org//apr/apr-1.7.0.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download APR_UTILS
+      get_url:
+                url="https://mirrors.estointernet.in/apache//apr/apr-util-1.6.1.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download PCRE Download
+      get_url:
+                url="https://ftp.pcre.org/pub/pcre/pcre-8.43.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download OpenSSL Download
+      get_url:
+                url="https://ftp.openssl.org/source/old/1.1.1/openssl-1.1.1d.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download Tomcat_Connector Download
+      get_url:
+                url="https://downloads.apache.org/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.48-src.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download CURL Download
+      get_url:
+                url="https://curl.haxx.se/download/curl-7.74.0.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download OIDC Download
+      get_url:
+                url="https://github.com/zmartzone/mod_auth_openidc/releases/download/v2.4.5/mod_auth_openidc-2.4.5.tar.gz"
+                dest="/tmp/packages"
+    -
+      name: Download Memcache Download
+      get_url:
+                url="https://memcached.org/files/memcached-1.6.9.tar.gz"
+                dest="/tmp/packages"

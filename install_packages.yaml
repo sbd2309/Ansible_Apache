@@ -1,0 +1,50 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+        name: Install OpenSSL
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/openssl-1.1.1d/"
+        with_items:
+                - ./config --prefix="/tmp/InstalledPackages/openssl-1.1.1d" shared
+                - /usr/bin/make
+                - /usr/bin/make install
+
+    -
+        name: Install PCRE
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/pcre-8.43/"
+        with_items:
+                - ./configure --prefix="/tmp/InstalledPackages/pcre-8.43"
+                - /usr/bin/make
+                - /usr/bin/make install
+    -
+        name: Install CURL
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/curl-7.74.0" 
+        with_items:
+                - ./configure --prefix="/tmp/InstalledPackages/curl-7.74.0" --with-ssl="/tmp/InstalledPackages/openssl-1.1.1d"
+                - /usr/bin/make
+                - /usr/bin/make install
+    -
+        name: Install APR
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/apr-1.7.0"
+        with_items:
+                - ./configure
+                - /usr/bin/make
+                - /usr/bin/make install
+
+    -
+        name: Install APR_UTIL
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/apr-util-1.6.1/"
+        with_items:
+                - ./configure --with-apr="/usr/local/apr" 
+                - /usr/bin/make
+                - /usr/bin/make install
+    -
+        name: Install MEMCACHE
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/memcached-1.6.9" 
+        with_items:
+                - ./configure --prefix="/tmp/InstalledPackages/memcached-1.6.9"
+                - /usr/bin/make
+                - /usr/bin/make install

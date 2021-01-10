@@ -1,0 +1,21 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+        name : Install APR
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/apr-1.7.0"
+        with_items:
+                - ./configure --prefix=/tmp/InstalledPackages/apr-1.7.0/    
+                - /usr/bin/make
+                - /usr/bin/make install
+    -
+        name: Install OIDC 
+        command: "{{ item }} chdir=/tmp/ExtractedPackages/mod_auth_openidc-2.4.5"
+        with_items:
+                - ./autogen.sh
+                - ./configure --with-apxs2="/tmp/InstalledPackages/httpd-2.4.46/bin/apxs" CURL_CFLAGS="-I/tmp/InstalledPackages/curl-7.74.0/include" "CURL_LIBS=-L/tmp/InstalledPackages/curl-7.74.0/lib -lcurl" OPENSSL_CFLAGS="-I/tmp/InstalledPackages/openssl-1.1.1d/include" "OPENSSL_LIBS=-L/tmp/InstalledPackages/openssl-1.1.1d/lib -lcrypto" APR_CFLAGS="-I/tmp/InstalledPackages/apr-1.7.0/include" "APR_LIBS=L/tmp/InstalledPackages/apr-1.7.0/lib -lapr" PCRE_CFLAGS="-I/tmp/InstalledPackages/pcre-8.43/include" "PCRE_LIBS=L/tmp/InstalledPackages/pcre-8.43/lib -lpcre"
+                - /usr/bin/make
+                - /usr/bin/make install

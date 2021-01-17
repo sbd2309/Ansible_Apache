@@ -1,0 +1,29 @@
+- hosts:
+        - all
+  become: true
+  become_method: sudo
+
+  tasks:
+    -
+      name: Create File in Remote
+      file:
+         path: /tmp/test.conf
+         state: touch
+    -
+      name: Edit file using blockinline
+      blockinfile:
+         path: /tmp/test.conf
+         backup: yes
+         block: |
+           ClientAliveInterval 360
+           ClientAliveCountMax 0
+    -
+      name: Edit at specific part of a file
+      blockinfile:
+         path: /tmp/test.conf
+         backup: yes
+         marker: "# {mark} ANSIBLE MANAGED BLOCK"
+         insertbefore: '^Client '
+         block: |
+           AllowUsers hakase vagrant
+           PermitRootLogin no

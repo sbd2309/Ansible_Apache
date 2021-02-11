@@ -8,6 +8,11 @@
       name: Make Package Directory
       command : mkdir /tmp/packages
     -
+      name: Download CJOSE
+      get_url:
+                url="https://mod-auth-openidc.org/download/cjose-0.6.1.5-1.el7.x86_64.rpm"
+                dest="/tmp/packages"
+    -
       name: Download Apache
       get_url:
                 url="https://mirrors.estointernet.in/apache//httpd/httpd-2.4.46.tar.gz"

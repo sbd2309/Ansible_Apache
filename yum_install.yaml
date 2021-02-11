@@ -20,7 +20,6 @@
                 - expat-devel
                 - openssl
                 - openssl-devel
-                - cjose
                 - jansson
                 - jansson-devel    
                 - libevent

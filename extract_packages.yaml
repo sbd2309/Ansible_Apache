@@ -5,6 +5,9 @@
 
   tasks:
     -
+      name: Make Extract Directory
+      command: mkdir /tmp/ExtractedPackages
+    -
       name: Extract Apache
       unarchive:
                 src: /tmp/packages/httpd-2.4.46.tar.gz

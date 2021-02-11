@@ -8,6 +8,9 @@
       name: Make Extract Directory
       command: mkdir /tmp/ExtractedPackages
     -
+      name: Install Cjose
+      command: yum install -y /tmp/packages/cjose-0.6.1.5-1.el7.x86_64.rpm      
+    -
       name: Extract Apache
       unarchive:
                 src: /tmp/packages/httpd-2.4.46.tar.gz

@@ -5,6 +5,9 @@
 
   tasks:
     -
+      name: Make Package Directory
+      command : mkdir /tmp/packages
+    -
       name: Download Apache
       get_url:
                 url="https://mirrors.estointernet.in/apache//httpd/httpd-2.4.46.tar.gz"

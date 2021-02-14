@@ -1,0 +1,9 @@
+---
+- name: Ping
+  import_playbook: ping.yaml
+
+- name: Update
+  import_playbook: copy.yaml
+
+- name: Download Node
+  import_playbook: yum_install.yaml
